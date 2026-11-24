@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مغامرة النحو – الدرس 1: الاسم والفعل والحرف</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d1b35;--muted:#6a6787;--card:#ffffff;--line:#ebe7f7;--ok:#16a34a;--bad:#e11d48;--gold:#f5b301;
+ --ism:#2563eb;--ism2:#dbeafe;--kh:#ea580c;--kh2:#ffedd5;--na:#9333ea;--na2:#f3e8ff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:"Cairo",system-ui,sans-serif;color:var(--ink);line-height:1.8;font-size:16px;min-height:100vh;
+ background:radial-gradient(1200px 600px at 100% -10%,#5b2bd6 0,transparent 60%),radial-gradient(900px 500px at -10% 30%,#0ea5a4 0,transparent 55%),linear-gradient(180deg,#1a1142,#120c2e)}
+.ar,.ex{font-family:"Amiri",serif}
+.ex{font-size:1.3em;line-height:2}
+/* HUD */
+.hud{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;padding:8px 12px;background:#120c2ecc;backdrop-filter:blur(10px);color:#fff;border-bottom:1px solid #ffffff1a}
+.hud .home{background:#ffffff1a;border:0;color:#fff;border-radius:12px;padding:4px 10px;font:700 .9rem Cairo;cursor:pointer}
+.hud .stat{display:flex;align-items:center;gap:4px;font-weight:800;font-size:.95rem;background:#ffffff14;border-radius:12px;padding:3px 10px}
+.hud .xpbar{flex:1;height:10px;background:#ffffff22;border-radius:10px;overflow:hidden;min-width:60px}
+.hud .xpbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#f5b301,#ff5ca8);transition:width .6s}
+.hud .snd{background:none;border:0;font-size:1.2rem;cursor:pointer}
+main{max-width:860px;margin:0 auto;padding:14px 14px 80px}
+.view{display:none}.view.on{display:block;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+/* map */
+.hero{color:#fff;text-align:center;padding:18px 6px 6px}
+.hero h1{margin:0;font-size:2rem;font-weight:900;background:linear-gradient(90deg,#ffd76a,#ff7ac6,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:4px 0 0;opacity:.85}
+.map{position:relative;margin:18px auto 0;max-width:520px}
+.map:before{content:"";position:absolute;top:30px;bottom:30px;right:50%;border-right:4px dashed #ffffff33}
+.node{position:relative;display:flex;align-items:center;gap:12px;width:78%;margin:14px 0;padding:12px 14px;border-radius:22px;color:#fff;cursor:pointer;box-shadow:0 10px 30px #0006;transition:transform .2s}
+.node:hover{transform:translateY(-3px) scale(1.02)}
+.node:nth-child(odd){margin-left:auto}.node:nth-child(even){margin-right:auto}
+.node .em{font-size:2.2rem;width:58px;height:58px;display:grid;place-items:center;background:#ffffff2b;border-radius:18px;flex:0 0 auto}
+.node b{display:block;font-size:1.05rem}.node small{opacity:.9}
+.node .stars{margin-inline-start:auto;font-size:1.05rem;letter-spacing:1px;white-space:nowrap}
+.node .badge{position:absolute;top:-10px;left:-6px;font-size:1.6rem;filter:drop-shadow(0 3px 4px #0007)}
+.cert-cta{display:block;margin:20px auto 0;text-align:center}
+/* level */
+.lvhead{border-radius:26px;color:#fff;padding:18px 18px 16px;position:relative;overflow:hidden;box-shadow:0 14px 40px #0007}
+.lvhead .big-em{position:absolute;left:12px;top:4px;font-size:5rem;opacity:.25}
+.lvhead small{opacity:.85;font-weight:700}.lvhead h2{margin:2px 0 4px;font-size:1.6rem;font-weight:900}
+.lvhead .goal{background:#ffffff26;border-radius:12px;padding:6px 10px;font-size:.93rem;display:inline-block}
+.step{display:inline-flex;align-items:center;gap:6px;color:#fff;font-weight:900;font-size:1.05rem;margin:22px 0 6px}
+.step span{background:#ffffff1f;border-radius:10px;padding:0 10px}
+.card{background:var(--card);border-radius:20px;padding:14px 16px;margin:10px 0;box-shadow:0 8px 24px #0004}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.story{display:flex;gap:12px;align-items:flex-start}
+.story .av{font-size:2.4rem;line-height:1}
+.bubble{background:#f4f1ff;border-radius:16px 16px 16px 4px;padding:10px 14px;flex:1}
+.pill{display:inline-block;border-radius:8px;padding:0 8px;font-weight:700}
+.p-ism{background:var(--ism2);color:var(--ism)}.p-kh{background:var(--kh2);color:var(--kh)}.p-na{background:var(--na2);color:var(--na)}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:.93rem;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+th,td{padding:7px 9px;text-align:right;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:#2d1b69;color:#fff}tr:last-child td{border-bottom:0}tr:nth-child(even) td{background:#faf8ff}
+.tw{overflow-x:auto;border-radius:14px}
+.memo{background:linear-gradient(135deg,#fff7d6,#ffe3f1);border-radius:20px;padding:14px 16px;margin:10px 0;box-shadow:0 8px 24px #0004;position:relative}
+.memo h4{margin:0 0 4px;font-size:1.05rem}
+.memo .verse{font-family:"Amiri",serif;font-size:1.3rem;text-align:center;line-height:2.1;color:#6b21a8;margin:4px 0}
+.memo .src{font-size:.8rem;color:var(--muted);text-align:center}
+.key{display:inline-block;background:#2d1b69;color:#ffd76a;border-radius:10px;padding:0 10px;font-weight:900;font-size:1.2rem;letter-spacing:3px}
+/* flip cards */
+.flips{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.flip{perspective:800px;height:130px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 6px 18px #0004}
+.flip .f{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff}
+.flip .f .e{font-size:2.2rem;line-height:1.1}.flip .f b{font-size:1.15rem}
+.flip .b{background:#fff;transform:rotateY(180deg);font-size:.9rem}
+.flip .b .ex{font-size:1.05rem;line-height:1.6}
+.hint{font-size:.8rem;color:#ffffffb0;text-align:center;margin:2px 0}
+/* buttons, games */
+.btn{border:0;border-radius:14px;padding:9px 16px;font:800 .98rem Cairo;cursor:pointer;color:#fff;background:linear-gradient(135deg,#7c3aed,#db2777);box-shadow:0 4px 0 #5b1a8a;transition:transform .1s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5b1a8a}
+.btn.alt{background:linear-gradient(135deg,#0ea5a4,#2563eb);box-shadow:0 4px 0 #134e7a}
+.btn.gold{background:linear-gradient(135deg,#f59e0b,#ef4444);box-shadow:0 4px 0 #9a3412}
+.btn.light{background:#f1edff;color:#4c1d95;box-shadow:0 4px 0 #d6ccff}
+.btn:disabled{opacity:.45}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{border:2px solid var(--line);background:#fff;border-radius:12px;padding:4px 12px;font:700 .93rem Cairo;cursor:pointer;color:var(--ink)}
+.chip.on{border-color:#7c3aed;background:#f3e8ff;color:#6b21a8}
+.out{border-radius:16px;background:#faf8ff;border:2px dashed #e0d7ff;padding:12px;margin-top:8px}
+.bigw{font-family:"Amiri",serif;font-size:1.8rem;text-align:center;line-height:2.1}
+.gamebox{text-align:center}
+.gametop{display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px}
+.timer{height:10px;border-radius:10px;background:#eee;overflow:hidden;margin-bottom:8px}.timer i{display:block;height:100%;background:linear-gradient(90deg,#16a34a,#f59e0b,#e11d48);width:100%;transition:width 1s linear}
+.word{font-family:"Amiri",serif;font-size:2.4rem;font-weight:700;margin:6px 0;min-height:70px}
+.fb{border-radius:12px;padding:7px 12px;margin-top:8px;font-weight:700}
+.fb.ok{background:#dcfce7;color:#166534}.fb.no{background:#ffe4e6;color:#9f1239}
+.shake{animation:shake .4s}@keyframes shake{25%{transform:translateX(6px)}50%{transform:translateX(-6px)}75%{transform:translateX(4px)}}
+.bounce{animation:bounce .45s}@keyframes bounce{40%{transform:scale(1.12)}}
+.opts{display:grid;gap:7px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:8px}
+.opts button{border:2px solid var(--line);background:#fff;border-radius:14px;padding:9px 12px;font:700 .95rem Cairo;cursor:pointer;color:var(--ink);text-align:center}
+.opts button:hover{border-color:#a78bfa}
+.opts button.right{background:#dcfce7;border-color:#16a34a}.opts button.wrong{background:#ffe4e6;border-color:#e11d48}
+.reveal{cursor:pointer;background:#fff;border-radius:18px;padding:10px 14px;margin:8px 0;box-shadow:0 6px 18px #0003;border:2px solid transparent}
+.reveal .ans{display:none;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);font-size:.95rem}
+.reveal.open{border-color:#a78bfa}.reveal.open .ans{display:block}
+.reveal .h{font-size:.8rem;color:var(--muted)}
+/* loading bars */
+.load{margin:8px 0}.load .lb{height:22px;border-radius:12px;background:#eee;overflow:hidden;position:relative}
+.load .lb i{position:absolute;inset:0 auto 0 0;width:0;border-radius:12px;transition:width 1.6s ease}
+.load .lb span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+/* boss */
+.boss{background:linear-gradient(160deg,#2d1b69,#4c1d95);color:#fff;border-radius:24px;padding:16px;box-shadow:0 14px 40px #0008}
+.boss .q{background:#fff;color:var(--ink);border-radius:18px;padding:12px 14px;margin-top:10px}
+.hearts{font-size:1.3rem;letter-spacing:2px}
+.badgeBig{font-size:4rem;text-align:center;animation:bounce .6s 2}
+/* trap */
+.trap .tw2{font-family:"Amiri",serif;font-size:2.2rem;font-weight:700}
+/* toast */
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(120px);background:#111827;color:#fff;border-radius:16px;padding:10px 18px;font-weight:800;z-index:50;transition:transform .35s;box-shadow:0 10px 30px #0008;white-space:nowrap}
+.toast.on{transform:translateX(-50%) translateY(0)}
+canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:60}
+.nextlv{margin:24px 0 0}
+.cert{background:#fffdf5;border:6px double #c79a2b;border-radius:20px;padding:22px;text-align:center;box-shadow:0 14px 40px #0008}
+.cert h2{font-family:Amiri;font-size:2rem;margin:0;color:#7a4a12}
+.cert .nm{font-family:Amiri;font-size:2.2rem;color:#4c1d95;font-weight:700;border-bottom:2px dotted #c79a2b;display:inline-block;min-width:60%;margin:6px 0}
+input.name{font:700 1rem Cairo;padding:8px 12px;border-radius:12px;border:2px solid #ddd;width:min(320px,90%)}
+html,body{overflow-x:hidden}
+@media(max-width:520px){.hud{gap:5px;padding:7px 8px}.hud .home span{display:none}.hud .stat{padding:2px 7px;font-size:.85rem}#hRank{font-size:.78rem}.hud .xpbar{min-width:30px}
+.node{width:92%;padding:10px 12px;gap:10px}.node .em{width:48px;height:48px;font-size:1.8rem}.node b{font-size:.98rem;line-height:1.5}.node small{font-size:.78rem}.node .stars{font-size:.85rem}.map:before{display:none}}
+#tg5 .opts button,#tg6 .opts button,#tg7 .opts button{font-family:Amiri,serif;font-size:1.2rem}
+.lab .opsrow{display:flex;gap:6px;flex-wrap:wrap}.lab .grp{font-size:.8rem;color:var(--muted);margin:6px 0 0}
+.lab .explain{margin-top:6px;font-size:.95rem}.lab .explain div{border-bottom:1px dashed var(--line);padding:2px 0}
+footer{text-align:center;color:#ffffff99;font-size:.85rem;padding:20px}
+footer a{color:#ffd76a}
+</style>
+</head>
+<body>
+<canvas id="cf"></canvas>
+<div class="hud">
+  <button class="home" onclick="go('home')">🗺️<span> الخريطة</span></button>
+  <div class="stat">⭐ <span id="hXp">0</span></div>
+  <div class="xpbar"><i id="hBar"></i></div>
+  <div class="stat" id="hRank">🌱 مبتدئ</div>
+  <div class="stat">🏅 <span id="hBadges">0</span>/7</div>
+  <button class="snd" id="snd" title="الصوت">🔊</button>
+</div>
+<main>
+
+<!-- =============== HOME / MAP =============== -->
+<div class="view" id="v-home">
+  <div class="hero">
+    <h1>مغامرة النحو 🚀</h1>
+    <p>درس مركّز · اجمع النجوم ⭐ · اهزم الزعيم 👾 · واحصل على شهادة الدرس 🏆</p>
+  </div>
+  <div class="map" id="map"></div>
+  <div class="cert-cta" id="certCta"></div>
+</div>
+
+<!-- =============== L1 =============== -->
+<div class="view" id="v-u1" data-n="1">
+<div class="lvhead" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)"><div class="big-em">🧩</div><small>المستوى ١</small><h2>الاسم والفعل والحرف</h2><div class="goal">🎯 الهدف: تعرف نوع أي كلمة في ٣ ثوانٍ</div></div>
+
+<div class="step">🎬 <span>الفكرة</span></div>
+<div class="card story"><div class="av">🎭</div><div class="bubble">تخيّل إن الكلمات <b>٣ شخصيات</b> في مسلسل:<br>
+<b>🌟 الاسم:</b> الشخصية الاجتماعية، بيقبل أي حاجة تتحط عليه: (أل)، تنوين، نداء، حرف جر.<br>
+<b>⚡ الفعل:</b> بطل الأكشن، دايمًا معاه <u>حدث</u> و<u>وقت</u> (ماضي، مضارع، أمر).<br>
+<b>🤝 الحرف:</b> اللاعب المساعد، ملوش معنى لوحده وبيظهر معناه مع الفريق بس.</div></div>
+
+<div class="step">📚 <span>القاعدة (اقلب الكارت)</span></div>
+<div class="flips">
+ <div class="flip"><div class="in"><div class="f"><div class="e">🌟</div><b>علامات الاسم</b></div><div class="b">الجر · التنوين · النداء · (أل) · الإسناد إليه<div class="ex">بالطالبِ – كتابٌ – يا عليُّ</div></div></div></div>
+ <div class="flip"><div class="in"><div class="f"><div class="e">⏮️</div><b>الفعل الماضي</b></div><div class="b">يقبل تاء الفاعل وتاء التأنيث الساكنة<div class="ex">كتبْتُ – كتبَتْ</div></div></div></div>
+ <div class="flip"><div class="in"><div class="f"><div class="e">▶️</div><b>الفعل المضارع</b></div><div class="b">يقبل: لم · لن · السين · سوف<br>ويبدأ بحرف من (أنيت)<div class="ex">سيكتبُ – لم يكتبْ</div></div></div></div>
+ <div class="flip"><div class="in"><div class="f"><div class="e">📢</div><b>فعل الأمر</b></div><div class="b">يدل على الطلب + يقبل ياء المخاطبة<div class="ex">اكتبْ – اكتبي</div></div></div></div>
+ <div class="flip"><div class="in"><div class="f"><div class="e">🤝</div><b>الحرف</b></div><div class="b">لا يقبل علامات الاسم ولا الفعل، ومعناه في غيره<div class="ex">في – من – لم – هل</div></div></div></div>
+ <div class="flip"><div class="in"><div class="f"><div class="e">🧱</div><b>مبني أم معرب؟</b></div><div class="b">الحروف + الماضي + الأمر: <b>مبنية</b><br>المضارع وأغلب الأسماء: <b>معربة</b></div></div></div>
+</div>
+<p class="hint">👆 اضغط على أي كارت عشان تقلبه</p><div class="step">📋 <span>كل المعلومات في مكان واحد</span></div>
+<div class="tw"><table><tr><th>القسم</th><th>تعريفه</th><th>علاماته</th><th>أمثلة</th></tr>
+<tr><td><b>الاسم</b></td><td>ما دلّ على معنى في نفسه غير مقترن بزمن</td><td>الجر – التنوين – النداء – (أل) – الإسناد إليه</td><td class="ar">بالطالبِ، كتابٌ، يا عليُّ</td></tr>
+<tr><td><b>الفعل الماضي</b></td><td>حدث وقع وانتهى</td><td>تاء الفاعل – تاء التأنيث الساكنة</td><td class="ar">كتبْتُ، كتبَتْ</td></tr>
+<tr><td><b>الفعل المضارع</b></td><td>حدث في الحال أو الاستقبال</td><td>لم – لن – السين – سوف (ويبدأ بحرف من: أنيت)</td><td class="ar">لم يكتبْ، سيكتبُ</td></tr>
+<tr><td><b>فعل الأمر</b></td><td>طلب حدوث الفعل</td><td>الدلالة على الطلب + قبول ياء المخاطبة</td><td class="ar">اكتبْ، اكتبي</td></tr>
+<tr><td><b>الحرف</b></td><td>ما لا يظهر معناه إلا مع غيره</td><td>لا يقبل علامات الاسم ولا الفعل</td><td class="ar">في، من، لم، هل، إلى</td></tr></table></div>
+<div class="card"><b>🧱 المعرب والمبني:</b><br>• <b>مبني دائمًا:</b> الحروف كلها، الفعل الماضي، فعل الأمر.<br>• <b>المضارع معرب</b> إلا إذا اتصلت به نون النسوة (يكتبْنَ) أو نون التوكيد المباشرة (ليكتبَنَّ) فيُبنى.<br>• <b>أغلب الأسماء معربة</b>، ومن الأسماء المبنية: الضمائر (هو، نحن)، أسماء الإشارة (هذا)، الأسماء الموصولة (الذي).</div>
+
+<div class="step">🧠 <span>احفظها كده</span></div>
+<div class="memo"><h4>📜 بيت ابن مالك لعلامات الاسم</h4><div class="verse">بالجرِّ والتنوينِ والندا وألْ ** ومُسنَدٍ للاسمِ تمييزٌ حصلْ</div><div class="src">ألفية ابن مالك</div></div>
+<div class="memo"><h4>🔑 كلمة السر للمضارع</h4>المضارع لازم يبدأ بحرف من كلمة <span class="key">أنيت</span> : أكتبُ – نكتبُ – يكتبُ – تكتبُ</div>
+
+<div class="step">🎮 <span>العب: سباق التصنيف ⏱️</span></div>
+<div class="card gamebox" id="g1">
+ <div class="gametop"><span>⏱️ <b id="g1t">40</b> ث</span><span>🔥 كومبو: <b id="g1c">0</b></span><span>✅ <b id="g1s">0</b></span></div>
+ <div class="timer"><i id="g1bar"></i></div>
+ <div class="word" id="g1w">جاهز؟</div>
+ <div class="row" id="g1btns" style="display:none"><button class="btn alt" data-k="اسم">🌟 اسم</button><button class="btn" data-k="فعل">⚡ فعل</button><button class="btn gold" data-k="حرف">🤝 حرف</button></div>
+ <div id="g1fb"></div>
+ <div class="row" style="margin-top:8px"><button class="btn" id="g1go">▶️ ابدأ السباق</button></div>
+</div>
+
+<div class="step">👾 <span>تحدّي الزعيم</span></div><div class="bossbox" data-sec="u1"></div>
+</div>
+
+<!-- =============== L2 =============== -->
+<!-- =============== L3 =============== -->
+<!-- =============== L4 =============== -->
+<!-- =============== L5 =============== -->
+<!-- =============== L6 =============== -->
+<!-- =============== L7 =============== -->
+<!-- =============== CERT =============== -->
+<div class="view" id="v-cert">
+ <div class="cert" id="certBox">
+  <div style="font-size:3rem">🏆</div>
+  <h2>شهادة بطل النحو</h2>
+  <p>تشهد «مغامرة النحو» بأن البطل/البطلة</p>
+  <div class="nm" id="certName">.......</div>
+  <p>أتمّ الدرس وهزم الزعيم 👾<br>وجمع <b id="certXp">0</b> نقطة ⭐</p>
+  <div style="font-size:1.8rem;letter-spacing:4px">🧩⚽📱🪄👨‍👩‍👧‍👦⏳👯</div>
+  <p style="color:#7a4a12">Grade 10 · Cambridge IGCSE Arabic</p>
+ </div>
+ <div class="card" style="text-align:center"><input class="name" id="nameIn" placeholder="اكتب اسمك هنا"><p style="margin:6px 0 0;color:var(--muted)">📸 خد سكرين شوت للشهادة وابعتها للمعلم!</p></div>
+</div>
+
+<div class="nextlv row" id="pager"></div>
+</main>
+<div class="toast" id="toast"></div>
+<footer>مغامرة النحو · الدرس 1: الاسم والفعل والحرف<span id="exlink"></span></footer>
+
+<script>
+const DATA={"sections": [{"id": "u1", "title": "الاسم والفعل والحرف", "qs": [{"q": "الكلمة التي تقبل التنوين ودخول (أل) عليها هي:", "o": ["الحرف", "فعل الأمر", "الفعل", "الاسم"], "a": 3, "e": "التنوين و(أل) من علامات الاسم."}, {"q": "في جملة (سوف يسافرُ أخي) عرفنا أن (يسافر) فعلٌ لأنها:", "o": ["قبلت (سوف)", "دلّت على ذات", "قبلت التنوين", "قبلت حرف الجر"], "a": 0, "e": "السين وسوف ولم ولن من علامات الفعل المضارع."}, {"q": "الكلمة التي لا يظهر معناها كاملًا إلا مع غيرها هي:", "o": ["الحرف", "الاسم", "الفعل الماضي", "فعل الأمر"], "a": 0, "e": "الحرف معناه في غيره، مثل: في، من، لم."}, {"q": "في (اكتبي الدرسَ) علامة فعل الأمر هي:", "o": ["قبوله (سوف)", "قبوله التنوين", "دلالته على الطلب مع قبول ياء المخاطبة", "قبوله تاء الفاعل"], "a": 2, "e": "الأمر يدل على الطلب ويقبل ياء المخاطبة."}, {"q": "أيّ الكلمات الآتية فعل ماضٍ؟", "o": ["قارئ", "في", "قراءة", "قرأَتْ"], "a": 3, "e": "قبلت تاء التأنيث الساكنة، وهي علامة الفعل الماضي."}, {"q": "في (يا محمدُ، أقبِلْ) عرفنا أن (محمد) اسمٌ لأنه:", "o": ["قبل تاء الفاعل", "قبل (لم)", "قبل النداء", "دلّ على زمن"], "a": 2, "e": "النداء من علامات الاسم."}, {"q": "كلمة (لم) في (لم يحضرْ الضيفُ) هي:", "o": ["حرف جر", "اسم", "حرف جزم", "فعل ماضٍ"], "a": 2, "e": "(لم) حرف يجزم الفعل المضارع."}]}]};
+const _nx=new Proxy(function(){},{get:(t,k)=>k===Symbol.toPrimitive?()=>'':_nx,apply:()=>_nx,set:()=>true});const $=s=>document.querySelector(s)||_nx, $$=s=>[...document.querySelectorAll(s)];
+const LV=[["u1", "🧩", "الاسم والفعل والحرف", "linear-gradient(135deg,#06b6d4,#3b82f6)", "صيّاد الكلمات 🎯"]];
+/* ---------- state ---------- */
+let S={xp:0,stars:{},name:""};
+try{const s=JSON.parse(localStorage.getItem('nahwAdv')||'null');if(s)S=Object.assign(S,s)}catch(e){}
+function save(){try{localStorage.setItem('nahwAdv',JSON.stringify(S))}catch(e){}}
+const RANKS=[[0,"🌱 مبتدئ"],[150,"📗 متعلّم"],[400,"🔥 محترف"],[800,"💎 خبير"],[1300,"👑 أسطورة النحو"]];
+function hud(){$('#hXp').textContent=S.xp;let r=RANKS[0],nx=null;for(let i=0;i<RANKS.length;i++){if(S.xp>=RANKS[i][0]){r=RANKS[i];nx=RANKS[i+1]}}
+ $('#hRank').textContent=r[1];$('#hBar').style.width=nx?((S.xp-r[0])/(nx[0]-r[0])*100)+'%':'100%';$('#hBadges').textContent=Object.keys(S.stars).filter(k=>S.stars[k]>0).length;}
+function addXp(n,msg){const before=rankOf(S.xp);S.xp+=n;save();hud();if(msg)toast(msg+`  +${n}⭐`);const after=rankOf(S.xp);if(after!==before){setTimeout(()=>{toast('🎉 رتبة جديدة: '+after);confetti()},900)}}
+function rankOf(x){let r=RANKS[0][1];RANKS.forEach(k=>{if(x>=k[0])r=k[1]});return r}
+let tT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),1800)}
+/* ---------- sound ---------- */
+let sound=true,AC=null;try{sound=localStorage.getItem('nahwSnd')!=='0'}catch(e){}
+$('#snd').textContent=sound?'🔊':'🔇';$('#snd').onclick=()=>{sound=!sound;$('#snd').textContent=sound?'🔊':'🔇';try{localStorage.setItem('nahwSnd',sound?'1':'0')}catch(e){}};
+function beep(ok){if(!sound)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const notes=ok?[660,880]:[220,170];notes.forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.type=ok?'triangle':'sawtooth';o.frequency.value=f;g.gain.setValueAtTime(.12,AC.currentTime+i*.09);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+i*.09+.18);o.connect(g);g.connect(AC.destination);o.start(AC.currentTime+i*.09);o.stop(AC.currentTime+i*.09+.2)})}catch(e){}}
+/* ---------- confetti ---------- */
+const cv=$('#cf'),cx=cv.getContext('2d');let parts=[],raf=null;
+function confetti(){cv.width=innerWidth;cv.height=innerHeight;for(let i=0;i<140;i++)parts.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*14,vy:Math.random()*-12-3,s:Math.random()*7+4,c:`hsl(${Math.random()*360},90%,60%)`,r:Math.random()*6,life:120});if(!raf)tick()}
+function tick(){cx.clearRect(0,0,cv.width,cv.height);parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=.2;p.life--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);cx.restore()});parts=parts.filter(p=>p.life>0&&p.y<cv.height+20);raf=parts.length?requestAnimationFrame(tick):(cx.clearRect(0,0,cv.width,cv.height),null)}
+/* ---------- routing ---------- */
+const VIEWS=['home','u1','cert'];
+function go(v,noHash){if(!VIEWS.includes(v))v='home';$$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+ if(!noHash){try{history.replaceState(null,'','#'+v)}catch(e){try{location.hash=v}catch(_){}}}scrollTo({top:0,behavior:'smooth'});
+ if(v==='home')drawMap();if(v==='cert')drawCert();if(v==='u6')runLoad();pager(v);}
+addEventListener('hashchange',()=>go(location.hash.slice(1)||'home',true));
+function pager(v){const p=$('#pager');if(v!=='u1'){p.innerHTML='';return}p.innerHTML=`<button class="btn light" onclick="go('home')">🗺️ الخريطة</button>`;return;const i=VIEWS.indexOf(v);if(i<1||i>7){p.innerHTML='';return}
+ p.innerHTML=(i>1?`<button class="btn light" onclick="go('${VIEWS[i-1]}')">→ المستوى السابق</button>`:'')+`<button class="btn light" onclick="go('home')">🗺️ الخريطة</button>`+(i<7?`<button class="btn" onclick="go('${VIEWS[i+1]}')">المستوى التالي ←</button>`:'');}
+function drawMap(){$('#map').innerHTML=LV.map((l,i)=>{const st=S.stars[l[0]]||0;return `<div class="node" style="background:${l[3]}" onclick="go('${l[0]}')">${st?'<span class="badge">🏅</span>':''}<div class="em">${l[1]}</div><div><small>المستوى ${'٠١٢٣٤٥٦٧٨٩'[+l[0].slice(1)]}</small><b>${l[2]}</b><small>${st?'وسام: '+l[4]:'👾 الزعيم في انتظارك'}</small></div><div class="stars">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div></div>`}).join('');
+ const all=LV.every(l=>S.stars[l[0]]>0);$('#certCta').innerHTML=all?`<button class="btn gold" onclick="go('cert')">🏆 استلم شهادة بطل النحو</button>`:`<p style="color:#fff;opacity:.8">🔒 الشهادة تتفتح لما تهزم الزعيم</p>`;}
+function drawCert(){$('#certXp').textContent=S.xp;$('#nameIn').value=S.name||'';$('#certName').textContent=S.name||'.......';}
+$('#nameIn').oninput=e=>{S.name=e.target.value;save();$('#certName').textContent=S.name||'.......'};
+
+/* ---------- flips ---------- */
+function bindFlips(root=document){root.querySelectorAll('.flip').forEach(f=>{if(f.dataset.b)return;f.dataset.b=1;f.onclick=()=>{f.classList.toggle('on');if(!f.dataset.seen){f.dataset.seen=1;addXp(2)}}})}
+function chips(el,items,cb,start=0){el.innerHTML='';items.forEach((t,i)=>{const b=document.createElement('button');b.className='chip'+(i===start?' on':'');b.textContent=t;b.onclick=()=>{[...el.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');cb(i)};el.appendChild(b)})}
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ---------- G1 race ---------- */
+const W1=[["الكتاب","اسم","قبل (أل)"],["يكتبُ","فعل","مضارع يقبل (لم)"],["في","حرف","حرف جر"],["اكتبْ","فعل","أمر يدل على الطلب"],["كتبَتْ","فعل","ماضٍ + تاء التأنيث"],["مدرسةٌ","اسم","قبل التنوين"],["لن","حرف","حرف نصب"],["سوف","حرف","حرف استقبال"],["قلمٍ","اسم","مجرور منوّن"],["هل","حرف","حرف استفهام"],["استمعوا","فعل","أمر"],["عليّ","اسم","يقبل النداء"],["نلعبُ","فعل","مضارع يبدأ بالنون"],["من","حرف","حرف جر"],["سماءٌ","اسم","قبل التنوين"],["لعبْتُ","فعل","ماضٍ + تاء الفاعل"],["إلى","حرف","حرف جر"],["الشمس","اسم","قبل (أل)"],["ادرسي","فعل","أمر + ياء المخاطبة"],["لم","حرف","حرف جزم"]];
+let g1={t:0,c:0,s:0,q:[],i:0,run:false,timer:null,lock:false};
+$('#g1go').onclick=()=>{g1={t:40,c:0,s:0,q:shuffle(W1),i:0,run:true,lock:false};$('#g1go').style.display='none';$('#g1btns').style.display='flex';$('#g1fb').innerHTML='';g1show();g1upd();
+ clearInterval(g1.timer);g1.timer=setInterval(()=>{g1.t--;g1upd();if(g1.t<=0)g1end()},1000)};
+function g1upd(){$('#g1t').textContent=g1.t;$('#g1c').textContent=g1.c;$('#g1s').textContent=g1.s;$('#g1bar').style.width=(g1.t/40*100)+'%'}
+function g1show(){if(g1.i>=g1.q.length)g1.q=g1.q.concat(shuffle(W1));$('#g1w').textContent=g1.q[g1.i][0];g1.lock=false}
+$$('#g1btns .btn').forEach(b=>b.onclick=()=>{if(!g1.run||g1.lock)return;g1.lock=true;const w=g1.q[g1.i];const ok=b.dataset.k===w[1];beep(ok);
+ if(ok){g1.s++;g1.c++;$('#g1w').classList.remove('bounce');void $('#g1w').offsetWidth;$('#g1w').classList.add('bounce');$('#g1fb').innerHTML=`<div class="fb ok">✔ ${w[2]} ${g1.c>=3?'🔥x'+g1.c:''}</div>`}
+ else{g1.c=0;$('#g1w').classList.remove('shake');void $('#g1w').offsetWidth;$('#g1w').classList.add('shake');$('#g1fb').innerHTML=`<div class="fb no">✘ ${w[0]}: ${w[1]} — ${w[2]}</div>`}
+ g1upd();g1.i++;setTimeout(g1show,ok?350:900)});
+function g1end(){clearInterval(g1.timer);g1.run=false;$('#g1btns').style.display='none';$('#g1w').textContent=g1.s>=15?'🏆 أسطوري!':g1.s>=10?'🔥 ممتاز!':'💪 حاول تاني!';
+ $('#g1fb').innerHTML=`<div class="fb ok">صنّفت ${g1.s} كلمة صح في ٤٠ ثانية</div>`;$('#g1go').style.display='';$('#g1go').textContent='🔁 العب تاني';addXp(g1.s*2,'سباق التصنيف');if(g1.s>=10)confetti()}
+
+/* ---------- G2 matrix ---------- */
+const MT=["مفرد / جمع تكسير","مثنى","جمع مذكر سالم","جمع مؤنث سالم","الأسماء الخمسة","ممنوع من الصرف","مضارع صحيح الآخر","مضارع معتل الآخر","الأفعال الخمسة"],MC=["رفع","نصب","جر","جزم"];
+const M=[[["الضمة","جاء <b>الطالبُ</b>"],["الفتحة","رأيتُ <b>الطلابَ</b>"],["الكسرة","سلّمتُ على <b>الطالبِ</b>"],null],
+ [["الألف","جاء <b>الطالبانِ</b>"],["الياء","رأيتُ <b>الطالبَيْنِ</b>"],["الياء","سلّمتُ على <b>الطالبَيْنِ</b>"],null],
+ [["الواو","جاء <b>المعلمونَ</b>"],["الياء","رأيتُ <b>المعلمينَ</b>"],["الياء","سلّمتُ على <b>المعلمينَ</b>"],null],
+ [["الضمة","جاءت <b>المعلماتُ</b>"],["الكسرة نيابة عن الفتحة","رأيتُ <b>المعلماتِ</b>"],["الكسرة","سلّمتُ على <b>المعلماتِ</b>"],null],
+ [["الواو","جاء <b>أبوك</b>"],["الألف","رأيتُ <b>أباك</b>"],["الياء","سلّمتُ على <b>أبيك</b>"],null],
+ [["الضمة","هذه <b>مساجدُ</b>"],["الفتحة","رأيتُ <b>مساجدَ</b>"],["الفتحة نيابة عن الكسرة","صلّيتُ في <b>مساجدَ</b> كثيرةٍ"],null],
+ [["الضمة","<b>يكتبُ</b> الطالبُ"],["الفتحة","لن <b>يكتبَ</b>"],null,["السكون","لم <b>يكتبْ</b>"]],
+ [["ضمة مقدرة","<b>يسعى</b> – <b>يدعو</b> – <b>يرمي</b>"],["فتحة مقدرة على الألف، ظاهرة على الواو والياء","لن <b>يسعى</b> – لن <b>يدعوَ</b>"],null,["حذف حرف العلة","لم <b>يسعَ</b> – لم <b>يدعُ</b> – لم <b>يرمِ</b>"]],
+ [["ثبوت النون","الطلابُ <b>يكتبونَ</b>"],["حذف النون","لن <b>يكتبوا</b>"],null,["حذف النون","لم <b>يكتبوا</b>"]]];
+let mt=0,mc=0,mSeen=new Set();
+function mRender(){const v=M[mt][mc];$('#mOut').innerHTML=v?`<div style="text-align:center">🎰 <b>${MT[mt]}</b> + <b>${MC[mc]}</b> = <span class="pill p-kh" style="font-size:1.1rem">${v[0]}</span></div><div class="bigw" style="font-size:1.5rem">${v[1]}</div>`:`<div class="fb no">🚫 ${mc===3?'الأسماء ما بتتجزمش! الجزم للمضارع بس.':'الأفعال ما بتتجرّش! الجر للأسماء بس.'}</div>`;
+ const k=mt+'-'+mc;if(v&&!mSeen.has(k)){mSeen.add(k);if(mSeen.size%5===0)addXp(5,'مستكشف العلامات')}}
+chips($('#mType'),MT,i=>{mt=i;mRender()});chips($('#mCase'),MC,i=>{mc=i;mRender()});mRender();
+
+/* ---------- generic round game ---------- */
+function roundGame(el,items,opts,render,{xp=3,title='',manual=false}={}){const src=()=>typeof items==='function'?items():items;let q=shuffle(src()),i=0,s=0;
+ function show(){if(i>=q.length){el.innerHTML=`<div class="word">${s===q.length?'🏆':'🎉'} ${s} / ${q.length}</div><div class="row"><button class="btn">🔁 العب تاني</button></div>`;el.querySelector('.btn').onclick=()=>{q=shuffle(src());i=0;s=0;show()};addXp(s*xp,title);if(s>=q.length-1)confetti();return}
+  const it=q[i];el.innerHTML=`<div class="gametop"><span>${i+1} / ${q.length}</span><span>✅ ${s}</span></div>${render(it)}<div class="opts">${opts(it).map((o,k)=>`<button data-k="${k}">${o}</button>`).join('')}</div><div class="fbx"></div>`;
+  el.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{if(el.dataset.lock==='1')return;el.dataset.lock='1';const k=+b.dataset.k,ok=k===it.a;beep(ok);if(ok)s++;
+   el.querySelectorAll('.opts button')[it.a].classList.add('right');if(!ok){b.classList.add('wrong');el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}
+   el.querySelector('.fbx').innerHTML=`<div class="fb ${ok?'ok':'no'}">${ok?'✔ ':'✘ '}${it.e||''}</div>`;
+   if(manual){const nb=document.createElement('div');nb.className='row';nb.style.marginTop='8px';nb.innerHTML='<button class="btn">التالي ←</button>';el.appendChild(nb);nb.querySelector('button').onclick=()=>{el.dataset.lock='0';i++;show()}}else setTimeout(()=>{el.dataset.lock='0';i++;show()},ok?1100:2200)})}
+ show();}
+/* G3 */
+const KT=["💬 مفرد","🎬 جملة فعلية","🖼️ جملة اسمية","📍 شبه جملة"];
+roundGame($('#g3'),[
+ {s:"العلمُ <u>نورٌ</u>",a:0,e:"كلمة واحدة: خبر مفرد"},{s:"الطالبُ <u>يحترمُ معلمَه</u>",a:1,e:"فعل + فاعل"},{s:"الوطنُ <u>ترابُه غالٍ</u>",a:2,e:"مبتدأ + خبر، والرابط الهاء"},
+ {s:"الطائرةُ <u>في المطارِ</u>",a:3,e:"جار ومجرور"},{s:"الحديقةُ <u>أمامَ البيتِ</u>",a:3,e:"ظرف مكان"},{s:"اللاعبون <u>مستعدّون</u>",a:0,e:"مفرد رغم إنه جمع! 😉"},
+ {s:"<u>في المكتبةِ</u> كتبٌ نادرةٌ",a:3,e:"شبه جملة مقدّم لأن المبتدأ نكرة"},{s:"الأمهاتُ <u>يعملْنَ</u> بإخلاص",a:1,e:"فعل + نون النسوة"}],
+ ()=>KT,it=>`<div class="bigw">${it.s}</div><p style="margin:0;color:var(--muted)">نوع الخبر اللي تحته خط؟</p>`,{title:'صنّف البوست'});
+/* G4 filter + intruder */
+const F=[["",'<span class="pill p-ism">الجوُّ</span> <span class="pill p-kh">جميلٌ</span>',"جملة اسمية: مبتدأ + خبر (مرفوعان)"],
+ ["كانَ",'<span class="pill p-na">كانَ</span> <span class="pill p-ism">الجوُّ</span> <span class="pill p-kh">جميلًا</span>',"الجوُّ صار «اسم كان» مرفوع · جميلًا صار «خبر كان» منصوب"],
+ ["أصبحَ",'<span class="pill p-na">أصبحَ</span> <span class="pill p-ism">الجوُّ</span> <span class="pill p-kh">جميلًا</span>',"نفس الشغل + معنى «في الصباح» ☀️"],
+ ["ليسَ",'<span class="pill p-na">ليسَ</span> <span class="pill p-ism">الجوُّ</span> <span class="pill p-kh">جميلًا</span>',"نفس الشغل + معنى «النفي» 🚫"]];
+$$('#v-u4 [data-f]').forEach(b=>b.onclick=()=>{const f=F[+b.dataset.f];const o=$('#fOut');o.style.transition='opacity .2s,transform .2s';o.style.opacity=0;o.style.transform='scale(.9)';
+ setTimeout(()=>{o.innerHTML=f[1];$('#fNote').textContent=f[2];o.style.opacity=1;o.style.transform='none'},220);if(+b.dataset.f)beep(true)});
+roundGame($('#g4'),[{o:["أصبح","ظلّ","ذهب","صار"],a:2,e:"ذهب فعل تام عادي"},{o:["كاد","أوشك","عسى","جلس"],a:3,e:"جلس فعل تام"},{o:["ليس","ما زال","كتب","بات"],a:2,e:"كتب فعل تام"},{o:["شرع","أخذ","أمسى","فهم"],a:3,e:"فهم فعل تام"},{o:["طفق","أضحى","لعب","ما دام"],a:2,e:"لعب فعل تام"}],
+ it=>it.o,()=>`<div class="word" style="font-size:1.6rem">🕵️ مين مش من النواسخ؟</div>`,{title:'مين الدخيل'});
+/* G5 family + transformer */
+const FAM=[["📜","كان","الماضي","كان الجوُّ باردًا"],["☀️","أصبح","وقت الصباح","أصبح الطريقُ مزدحمًا"],["🌤️","أضحى","وقت الضحى","أضحى الجوُّ حارًّا"],["🌇","أمسى","وقت المساء","أمسى الشارعُ هادئًا"],["🌞","ظلّ","طوال النهار","ظلّ العاملُ نشيطًا"],["🌙","بات","طوال الليل","بات الحارسُ يقظًا"],["🔄","صار","التحوّل","صار الماءُ ثلجًا"],["🚫","ليس","النفي","ليس الكسلُ مفيدًا"],["♾️","ما زال","الاستمرار","ما زال المطرُ غزيرًا"],["🔁","ما برح / ما فتئ / ما انفكّ","الاستمرار","ما برح الطالبُ مجتهدًا"],["⏳","ما دام","المدة (بشرط ما)","سأجتهدُ ما دمتُ قادرًا"]];
+$('#kanFam').innerHTML=FAM.map(f=>`<div class="flip"><div class="in"><div class="f"><div class="e">${f[0]}</div><b>${f[1]}</b></div><div class="b"><b>${f[2]}</b><div class="ex">${f[3]}</div></div></div></div>`).join('');
+
+/* G6 loading + an */
+function runLoad(){$$('#v-u6 .lb i').forEach(i=>{i.style.transition='none';i.style.width='0';void i.offsetWidth;i.style.transition='width 1.6s ease';setTimeout(()=>i.style.width=i.dataset.w+'%',60)})}
+$('#replayLoad').onclick=runLoad;
+const AN=["✅ لازم أن","🚫 ممنوع أن","😐 الأكثر بدونها","🙂 الأكثر معها"];
+roundGame($('#g6'),[{v:"حرى",s:"حرى الطالبُ ___ ينجحَ",a:0,e:"حرى واخلولق: لازم أن"},{v:"شرع",s:"شرع المهندسُ ___ يرسمُ",a:1,e:"الشروع: ممنوع أن"},{v:"كاد",s:"كاد الماءُ ___ يغلي",a:2,e:"كاد: الأكثر بدون أن"},{v:"عسى",s:"عسى الفرجُ ___ يأتيَ",a:3,e:"عسى: الأكثر مع أن"},{v:"أخذ",s:"أخذ الطفلُ ___ يضحكُ",a:1,e:"أخذ هنا شروع: ممنوع أن"},{v:"اخلولق",s:"اخلولقت السماءُ ___ تمطرَ",a:0,e:"اخلولق: لازم أن"},{v:"أوشك",s:"أوشك الدرسُ ___ ينتهيَ",a:3,e:"أوشك: الأكثر مع أن"},{v:"كرب",s:"كرب الصبرُ ___ ينفدُ",a:2,e:"كرب: الأكثر بدون أن"}],
+ ()=>AN,it=>`<div class="bigw">${it.s.replace('___','<span style="color:#db2777">(أن؟)</span>')}</div><p style="margin:0;color:var(--muted)">الفعل: <b>${it.v}</b></p>`,{title:'أن ولا لأ'});
+/* G7 trap + switcher */
+roundGame($('#g7'),[{w:"المعلمات",a:0,e:"مفردها معلمة + ألف وتاء زائدتان"},{w:"أصوات",a:1,e:"مفردها صوت، التاء أصلية!"},{w:"أبيات",a:1,e:"مفردها بيت، التاء أصلية!"},{w:"الطالبات",a:0,e:"ألف وتاء زائدتان"},{w:"قضاة",a:1,e:"مفردها قاضٍ، والألف منقلبة"},{w:"سيارات",a:0,e:"مفردها سيارة"},{w:"أموات",a:1,e:"مفردها ميت، التاء أصلية"},{w:"الممرضات",a:0,e:"مفردها ممرضة"}],
+ ()=>["👩‍👩‍👧 جمع مؤنث سالم","🎭 متنكّر! جمع تكسير"],it=>`<div class="tw2">${it.w}</div><p style="margin:0;color:var(--muted)">جمع مؤنث سالم حقيقي ولا متنكّر؟</p>`,{title:'كاشف المتنكّرين'});
+const CT=["👯 مثنى","👨‍👩‍👦‍👦 جمع مذكر","👩‍👩‍👧 جمع مؤنث","🎟️ اثنان","🎟️ عشرون","🧱 جمع تكسير"],CC=["رفع","نصب","جر"];
+const CD=[[["حضر <b>المهندسانِ</b>","الألف"],["قابلتُ <b>المهندسَيْنِ</b>","الياء"],["سلّمتُ على <b>المهندسَيْنِ</b>","الياء"]],
+ [["حضر <b>المهندسونَ</b>","الواو"],["قابلتُ <b>المهندسينَ</b>","الياء"],["سلّمتُ على <b>المهندسينَ</b>","الياء"]],
+ [["حضرت <b>المهندساتُ</b>","الضمة"],["قابلتُ <b>المهندساتِ</b>","الكسرة نيابة عن الفتحة"],["سلّمتُ على <b>المهندساتِ</b>","الكسرة"]],
+ [["حضر <b>اثنانِ</b>","الألف"],["قابلتُ <b>اثنينِ</b>","الياء"],["سلّمتُ على <b>اثنينِ</b>","الياء"]],
+ [["حضر <b>عشرونَ</b> مهندسًا","الواو"],["قابلتُ <b>عشرينَ</b> مهندسًا","الياء"],["سلّمتُ على <b>عشرينَ</b> مهندسًا","الياء"]],
+ [["حضر <b>العمّالُ</b>","الضمة"],["قابلتُ <b>العمّالَ</b>","الفتحة"],["سلّمتُ على <b>العمّالِ</b>","الكسرة"]]];
+let ct=0,cc=0;function cRender(){const v=CD[ct][cc];$('#cOut').innerHTML=`<div class="bigw">${v[0]}</div><div style="text-align:center">علامة ${['الرفع','النصب','الجر'][cc]}: <span class="pill p-kh">${v[1]}</span></div>`}
+chips($('#cType'),CT,i=>{ct=i;cRender()});chips($('#cCase'),CC,i=>{cc=i;cRender()});cRender();
+
+/* ---------- TRANSFORMATION LAB ---------- */
+const BS=[
+ {g:'m',sn:['المعلمُ','المعلمانِ','المعلمونَ'],sa:['المعلمَ','المعلمَيْنِ','المعلمينَ'],an:['مخلصٌ','مخلصانِ','مخلصونَ'],aa:['مخلصًا','مخلصَيْنِ','مخلصينَ'],vi:['يشرحُ','يشرحانِ','يشرحونَ'],vs:['يشرحَ','يشرحا','يشرحوا'],o:'الدرسَ'},
+ {g:'f',sn:['المهندسةُ','المهندستانِ','المهندساتُ'],sa:['المهندسةَ','المهندستَيْنِ','المهندساتِ'],an:['ماهرةٌ','ماهرتانِ','ماهراتٌ'],aa:['ماهرةً','ماهرتَيْنِ','ماهراتٍ'],vi:['تصمّمُ','تصمّمانِ','يصمّمْنَ'],vs:['تصمّمَ','تصمّما','يصمّمْنَ'],o:'الجسرَ'},
+ {g:'m',sn:['اللاعبُ','اللاعبانِ','اللاعبونَ'],sa:['اللاعبَ','اللاعبَيْنِ','اللاعبينَ'],an:['مستعدٌّ','مستعدّانِ','مستعدّونَ'],aa:['مستعدًّا','مستعدَّيْنِ','مستعدّينَ'],vi:['يتدرّبُ','يتدرّبانِ','يتدرّبونَ'],vs:['يتدرّبَ','يتدرّبا','يتدرّبوا'],o:'بجدٍّ'},
+ {g:'f',sn:['الطالبةُ','الطالبتانِ','الطالباتُ'],sa:['الطالبةَ','الطالبتَيْنِ','الطالباتِ'],an:['متفوقةٌ','متفوقتانِ','متفوقاتٌ'],aa:['متفوقةً','متفوقتَيْنِ','متفوقاتٍ'],vi:['تذاكرُ','تذاكرانِ','يذاكرْنَ'],vs:['تذاكرَ','تذاكرا','يذاكرْنَ'],o:'بجدٍّ'},
+ {g:'m',sn:['المسافرُ','المسافرانِ','المسافرونَ'],sa:['المسافرَ','المسافرَيْنِ','المسافرينَ'],an:['متعبٌ','متعبانِ','متعبونَ'],aa:['متعبًا','متعبَيْنِ','متعبينَ'],vi:['يستريحُ','يستريحانِ','يستريحونَ'],vs:['يستريحَ','يستريحا','يستريحوا'],o:'قليلًا'},
+ {g:'f',sn:['الممرضةُ','الممرضتانِ','الممرضاتُ'],sa:['الممرضةَ','الممرضتَيْنِ','الممرضاتِ'],an:['نشيطةٌ','نشيطتانِ','نشيطاتٌ'],aa:['نشيطةً','نشيطتَيْنِ','نشيطاتٍ'],vi:['تساعدُ','تساعدانِ','يساعدْنَ'],vs:['تساعدَ','تساعدا','يساعدْنَ'],o:'المرضى'},
+ {g:'m',sn:['المتسابقُ','المتسابقانِ','المتسابقونَ'],sa:['المتسابقَ','المتسابقَيْنِ','المتسابقينَ'],an:['سعيدٌ','سعيدانِ','سعيدونَ'],aa:['سعيدًا','سعيدَيْنِ','سعيدينَ'],vi:['يفوزُ','يفوزانِ','يفوزونَ'],vs:['يفوزَ','يفوزا','يفوزوا'],o:'بالجائزةِ'},
+ {g:'f',sn:['المعلمةُ','المعلمتانِ','المعلماتُ'],sa:['المعلمةَ','المعلمتَيْنِ','المعلماتِ'],an:['صبورةٌ','صبورتانِ','صبوراتٌ'],aa:['صبورةً','صبورتَيْنِ','صبوراتٍ'],vi:['تشرحُ','تشرحانِ','يشرحْنَ'],vs:['تشرحَ','تشرحا','يشرحْنَ'],o:'الدرسَ'}];
+const OPS=[{n:'بدون',k:'none'},
+ {n:'كان',f:'كانتِ',k:'kan',m:'الاتصاف في الماضي'},{n:'أصبح',f:'أصبحتِ',k:'kan',m:'الصباح أو التحوّل'},{n:'أضحى',f:'أضحتِ',k:'kan',m:'وقت الضحى'},{n:'أمسى',f:'أمستِ',k:'kan',m:'المساء'},{n:'ظلّ',f:'ظلّتِ',k:'kan',m:'طوال النهار'},{n:'بات',f:'باتتِ',k:'kan',m:'الليل'},{n:'صار',f:'صارتِ',k:'kan',m:'التحوّل'},{n:'ليس',f:'ليستِ',k:'kan',m:'النفي'},{n:'ما زال',f:'ما زالتِ',k:'kan',m:'الاستمرار'},{n:'ما برح',f:'ما برحتِ',k:'kan',m:'الاستمرار'},
+ {n:'كاد',f:'كادتِ',k:'kad',an:0,m:'المقاربة'},{n:'أوشك',f:'أوشكتِ',k:'kad',an:1,m:'المقاربة'},{n:'كرب',f:'كربتِ',k:'kad',an:0,m:'المقاربة'},{n:'عسى',f:'عسى',k:'kad',an:1,m:'الرجاء'},{n:'حرى',f:'حرى',k:'kad',an:2,m:'الرجاء'},{n:'شرع',f:'شرعتِ',k:'kad',an:-1,m:'الشروع'},{n:'أخذ',f:'أخذتِ',k:'kad',an:-1,m:'الشروع'},{n:'بدأ',f:'بدأتِ',k:'kad',an:-1,m:'الشروع'}];
+const NUM=['مفرد','مثنى','جمع'];
+const nomS=(b,n)=>n===0?'الضمة':n===1?'الألف لأنه مثنى':b.g==='m'?'الواو لأنه جمع مذكر سالم':'الضمة لأنه جمع مؤنث سالم';
+const accS=(b,n)=>n===0?'الفتحة':n===1?'الياء لأنه مثنى':b.g==='m'?'الياء لأنه جمع مذكر سالم':'الكسرة نيابة عن الفتحة لأنه جمع مؤنث سالم';
+const verbOf=(b,op)=>b.g==='f'?op.f:op.n;
+const pred=(b,n,op)=>(op.an>0?'أن '+b.vs[n]:b.vi[n])+' '+b.o;
+const baseTxt=(b,op)=>op.k==='kad'?`${b.sn[0]} ${b.vi[0]} ${b.o}`:`${b.sn[0]} ${b.an[0]}`;
+function build(b,n,op){const fpl=b.g==='f'&&n===2;
+ if(op.k==='none')return {t:`${b.sn[n]} ${b.an[n]}`,h:`<span class="pill p-ism">${b.sn[n]}</span> <span class="pill p-kh">${b.an[n]}</span>`,
+  x:[`🔵 <b>${b.sn[n]}</b>: مبتدأ مرفوع وعلامة رفعه ${nomS(b,n)}.`,`🟠 <b>${b.an[n]}</b>: خبر مرفوع وعلامة رفعه ${nomS(b,n)}.`,`💡 الخبر يطابق المبتدأ في العدد (${NUM[n]}) والنوع.`]};
+ const V=verbOf(b,op);
+ const vdesc=op.n==='ما زال'||op.n==='ما برح'?`(ما) حرف نفي + (${op.n.split(' ')[1]}) فعل ماضٍ ناقص`:op.n==='ليس'||op.n==='عسى'||op.n==='حرى'?'فعل ماضٍ جامد ناقص':'فعل ماضٍ ناقص';
+ if(op.k==='kan')return {t:`${V} ${b.sn[n]} ${b.aa[n]}`,h:`<span class="pill p-na">${V}</span> <span class="pill p-ism">${b.sn[n]}</span> <span class="pill p-kh">${b.aa[n]}</span>`,
+  x:[`🟣 <b>${V}</b>: ${vdesc} يفيد ${op.m}${b.g==='f'&&op.f!==op.n?'، والتاء للتأنيث':''}.`,`🔵 <b>${b.sn[n]}</b>: اسم ${op.n} مرفوع وعلامة رفعه ${nomS(b,n)}.`,`🟠 <b>${b.aa[n]}</b>: خبر ${op.n} منصوب وعلامة نصبه ${accS(b,n)}.`,n?`💡 الفعل الناسخ يبقى مفردًا لأنه متقدّم على اسمه.`:'']};
+ const P=pred(b,n,op);const vf=op.an>0?b.vs[n]:b.vi[n];
+ const vsg=fpl?'مبني على السكون لاتصاله بنون النسوة':op.an>0?(n===0?'منصوب بأن وعلامة نصبه الفتحة':'منصوب بأن وعلامة نصبه حذف النون لأنه من الأفعال الخمسة'):(n===0?'مرفوع وعلامة رفعه الضمة':'مرفوع وعلامة رفعه ثبوت النون لأنه من الأفعال الخمسة');
+ const anNote=op.an===2?'يجب اقتران خبره بأن':op.an===1?'الأكثر اقتران خبره بأن':op.an===-1?'يمتنع اقتران خبره بأن':'الأكثر تجرّد خبره من أن';
+ return {t:`${V} ${b.sn[n]} ${P}`,h:`<span class="pill p-na">${V}</span> <span class="pill p-ism">${b.sn[n]}</span> <span class="pill p-kh">${P}</span>`,
+  x:[`🟣 <b>${V}</b>: ${vdesc} من أفعال ${op.m} (${anNote}).`,`🔵 <b>${b.sn[n]}</b>: اسم ${op.n} مرفوع وعلامة رفعه ${nomS(b,n)}.`,`🟠 <b>${vf}</b>: فعل مضارع ${vsg}، و${op.an>0?'المصدر المؤول':'الجملة الفعلية'} في محل نصب خبر ${op.n}.`,`💡 خبر ${op.n} لا يكون إلا جملة فعلية فعلها مضارع.`]};}
+function makeLab(el,kinds){let bi=0,n=0,oi=0;const ops=OPS.filter(o=>kinds.includes(o.k));let seen=new Set();
+ el.innerHTML=`<p style="margin:0">١) اختار الجملة:</p><div class="chips" data-r="b"></div><p style="margin:4px 0 0">٢) اختار العدد:</p><div class="chips" data-r="n"></div>${ops.length>1?`<p style="margin:4px 0 0">٣) اختار الناسخ:</p><div class="chips" data-r="o"></div>`:''}<div class="out"></div>`;
+ const rnd=()=>{const b=BS[bi],op=ops[oi],r=build(b,n,op);el.querySelector('.out').innerHTML=`<div class="ex" style="text-align:center;color:var(--muted)">الأصل: ${baseTxt(b,op)}</div><div class="bigw bounce">${r.h}</div><div class="explain">${r.x.filter(Boolean).map(x=>`<div>${x}</div>`).join('')}</div>`;
+  const k=bi+'-'+n+'-'+oi;if(!seen.has(k)){seen.add(k);if(seen.size%5===0)addXp(5,'مختبر التحويل')}};
+ chips(el.querySelector('[data-r=b]'),BS.map(b=>b.sn[0]),i=>{bi=i;rnd()});chips(el.querySelector('[data-r=n]'),NUM,i=>{n=i;rnd()});
+ if(ops.length>1){const oc=el.querySelector('[data-r=o]');chips(oc,ops.map(o=>o.n==='بدون'?'❌ بدون ناسخ':o.n),i=>{oi=i;rnd()},0)}rnd();}
+function genQ(kinds,nums){const ops=OPS.filter(o=>kinds.includes(o.k));let b,n,op;
+ do{b=BS[Math.floor(Math.random()*BS.length)];op=ops[Math.floor(Math.random()*ops.length)];n=nums[Math.floor(Math.random()*nums.length)]}while(op.k==='none'&&n===0);
+ const ins=[];if(n)ins.push(`اجعل المبتدأ ${NUM[n]==='جمع'?(b.g==='m'?'جمع مذكر سالمًا':'جمع مؤنث سالمًا'):'مثنى'}`);if(op.k!=='none')ins.push(`أدخل (${op.n})`);
+ const r=build(b,n,op);const V=verbOf(b,op);let d=[];const w=n===0?1:0;
+ if(op.k==='none')d=[`${b.sn[n]} ${b.an[0]}`,`${b.sa[n]} ${b.aa[n]}`,`${b.sn[n]} ${b.aa[n]}`,`${b.sn[w]} ${b.an[n]}`];
+ else if(op.k==='kan')d=[`${V} ${b.sn[n]} ${b.an[n]}`,`${V} ${b.sa[n]} ${b.aa[n]}`,`${V} ${b.sn[n]} ${b.aa[w]}`,`${V} ${b.sa[n]} ${b.an[n]}`];
+ else{d=[`${V} ${b.sn[n]} ${b.aa[n]}`,`${V} ${b.sa[n]} ${pred(b,n,op)}`];if(op.an===-1)d.push(`${V} ${b.sn[n]} أن ${b.vs[n]} ${b.o}`);d.push(`${V} ${b.sn[n]} ${(op.an>0?'أن '+b.vs[w]:b.vi[w])} ${b.o}`);d.push(`${V} ${b.sa[n]} ${b.an[n]}`)}
+ d=[...new Set(d.filter(x=>x!==r.t))].slice(0,3);const o=shuffle([r.t,...d]);
+ return {base:baseTxt(b,op),ins:ins.join(' ثم ')+' وغيّر ما يلزم',o,a:o.indexOf(r.t),e:'<br>'+r.x.filter(Boolean).join('<br>')};}
+function makeTGame(el,kinds,nums){roundGame(el,()=>Array.from({length:8},()=>genQ(kinds,nums)),it=>it.o,it=>`<div style="margin-top:4px"><span class="pill" style="background:#fff4d6;color:#92400e">✏️ ${it.ins}</span></div><div class="bigw" style="font-size:1.5rem">${it.base}</div>`,{xp:4,title:'تحدّي التحويل',manual:true});}
+makeLab($('#lab5'),['none','kan']);makeTGame($('#tg5'),['kan'],[0,1,2]);
+makeLab($('#lab6'),['kad']);makeTGame($('#tg6'),['kad'],[0,1,2]);
+makeLab($('#lab7'),['none']);makeTGame($('#tg7'),['none'],[1,2]);
+
+/* ---------- BOSS ---------- */
+const BOSSES={u1:"👾 زعيم الكلمات"};
+$$('.bossbox').forEach(box=>{const id=box.dataset.sec;const sec=DATA.sections.find(s=>s.id===id);const lv=LV.find(l=>l[0]===id);
+ function intro(){const st=S.stars[id]||0;box.innerHTML=`<div class="boss" style="text-align:center"><div style="font-size:3.4rem">${BOSSES[id].split(' ')[0]}</div><b style="font-size:1.25rem">${BOSSES[id].split(' ').slice(1).join(' ')}</b><p style="margin:4px 0">٥ أسئلة · ❤️❤️❤️ ثلاث فرص · اهزمه واكسب وسام «${lv[4]}»</p>${st?`<p>أفضل نتيجة: ${'⭐'.repeat(st)}</p>`:''}<button class="btn gold">⚔️ ابدأ المواجهة</button></div>`;box.querySelector('.btn').onclick=start}
+ function start(){const qs=shuffle(sec.qs).slice(0,5);let i=0,hp=3,ok=0;
+  function show(){if(hp<=0)return lose();if(i>=qs.length)return win();const q=qs[i];
+   box.innerHTML=`<div class="boss"><div style="display:flex;justify-content:space-between;align-items:center"><span class="hearts">${'❤️'.repeat(hp)}${'🖤'.repeat(3-hp)}</span><b>${BOSSES[id]}</b><span>${i+1}/5</span></div>
+   <div class="timer" style="background:#ffffff33;margin-top:8px"><i style="width:${100-(ok/5)*100}%;background:linear-gradient(90deg,#ef4444,#f97316)"></i></div><small>❤️‍🔥 صحة الزعيم</small>
+   <div class="q"><b>${q.q}</b><div class="opts">${q.o.map((o,k)=>`<button data-k="${k}">${o}</button>`).join('')}</div><div class="fbx"></div></div></div>`;
+   box.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{if(box.dataset.lock==='1')return;box.dataset.lock='1';const k=+b.dataset.k,good=k===q.a;beep(good);
+    box.querySelectorAll('.opts button')[q.a].classList.add('right');if(good){ok++}else{hp--;b.classList.add('wrong');box.firstChild.classList.add('shake')}
+    box.querySelector('.fbx').innerHTML=`<div class="fb ${good?'ok':'no'}">${good?'💥 ضربة موفّقة! ':'🛡️ الزعيم صدّها! '}${q.e}</div>`;
+    setTimeout(()=>{box.dataset.lock='0';i++;show()},good?1300:2600)})}
+  function win(){const st=hp===3?3:hp===2?2:1;const prev=S.stars[id]||0;const first=!prev;if(st>prev){S.stars[id]=st;save()}
+   box.innerHTML=`<div class="boss" style="text-align:center"><div class="badgeBig">🏅</div><b style="font-size:1.3rem">هزمت ${BOSSES[id]}!</b><p style="font-size:1.6rem;margin:2px">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</p><p>${first?'وسام جديد: <b>'+lv[4]+'</b>':'نتيجة ممتازة!'}</p><div class="row"><button class="btn light" data-r>🔁 حاول تاخد ٣ نجوم</button>${id!=='u7'?`<button class="btn gold" onclick="go('${VIEWS[VIEWS.indexOf(id)+1]}')">المستوى التالي ←</button>`:`<button class="btn gold" onclick="go('home')">🗺️ الخريطة</button>`}</div></div>`;
+   box.querySelector('[data-r]').onclick=start;confetti();addXp(st*20+(first?30:0),'هزمت الزعيم');hud();
+   if(LV.every(l=>S.stars[l[0]]>0)&&first)setTimeout(()=>{toast('🏆 الشهادة اتفتحت! روح للخريطة');confetti()},1500)}
+  function lose(){box.innerHTML=`<div class="boss" style="text-align:center"><div style="font-size:3rem">😵</div><b>الزعيم كسب الجولة دي!</b><p>راجع الكروت و«احفظها كده» وارجع أقوى 💪</p><button class="btn gold">⚔️ جولة جديدة</button></div>`;box.querySelector('.btn').onclick=start;addXp(ok*4)}
+  show()}
+ intro()});
+
+bindFlips();hud();
+const EXURL="https://claude.ai/artifact/KEZu1iTKsnEH3ErS2UVAcC";if(EXURL.startsWith('http'))$('#exlink').innerHTML=` · <a href="${EXURL}" target="_blank" rel="noopener">🎯 تدريبات إضافية</a>`;
+go(location.hash.slice(1)||'home',true);
+</script>
+</body>
+</html>
